@@ -4,7 +4,7 @@ Fork of [nohum](https://github.com/nohum)'s [chromecast-mqtt-connector](https://
 
 ## Usage
 
-Control behaviour by defining ENV variables `MQTT_HOST`, `MQTT_PORT`, `MQTT_USER`, `MQTT_PASSWORD`.
+Control behaviour by defining ENV variables `MQTT_HOST`, `MQTT_PORT`, `MQTT_USER`, `MQTT_PASSWORD`, `MQTT_CAFILE`.
 
 	git clone 
 	pip3 install -r requirements.txt
@@ -56,4 +56,15 @@ For other player controls, simply publish e.g. `RESUME`, `PAUSE`, `STOP`, `SKIP`
 ### docker build
 
 	docker build -t chromecast-mqtt-smarthome-connector .
-	docker build -t chromecast-mqtt-smarthome-connector:armhf -f Dockerfile.armhf .
+
+Cross-build (for Raspberry Pi):
+
+    docker buildx create --name mybuilder
+    docker buildx use mybuilder
+    docker buildx build \
+        --platform linux/amd64,linux/arm/v7 \
+        -t dersimn/chromecast-mqtt-smarthome-connector \
+        -t dersimn/chromecast-mqtt-smarthome-connector:1 \
+        -t dersimn/chromecast-mqtt-smarthome-connector:1.3 \
+        -t dersimn/chromecast-mqtt-smarthome-connector:1.3.2 \
+        --push .
