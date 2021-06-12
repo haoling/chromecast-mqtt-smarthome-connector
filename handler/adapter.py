@@ -223,10 +223,9 @@ class ChromecastConnection(MqttChangesCallback):
         try:
             self.mqtt_properties.write_connection_status(CONNECTION_STATUS_WAITING_FOR_DEVICE)
             self.mqtt_properties.write_online_status("false")
-            devices = get_chromecasts(tries=5)
+            (devices, serviceBrowser) = get_listed_chromecasts(friendly_names=[device_name], tries=5, discovery_timeout=120)
 
-            for device_struct in devices:
-                device = device_struct[0]
+            for device in devices:
                 if device.device.friendly_name == device_name:
                     self.device = device
                     break
