@@ -3,7 +3,7 @@ from collections import namedtuple
 from queue import Queue
 from threading import Thread
 
-from pychromecast import IDLE_APP_ID, get_chromecasts, PyChromecastError
+from pychromecast import IDLE_APP_ID, get_chromecasts, get_listed_chromecasts, PyChromecastError
 from pychromecast.controllers.media import MEDIA_PLAYER_STATE_IDLE
 from pychromecast.socket_client import CONNECTION_STATUS_CONNECTED, CONNECTION_STATUS_FAILED, \
     CONNECTION_STATUS_DISCONNECTED
